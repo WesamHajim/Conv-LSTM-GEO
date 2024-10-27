@@ -7,9 +7,9 @@ function [P] = Conv_Lstm(fz,data_x, target_y,data_test)
 %       [numberOfReadings 1]
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-fz;
-[m, n]=size(data_x);
-[mm, nn]=size(data_test);
+fz
+[m n]=size(data_x);
+[mm nn]=size(data_test);
 inputdata=reshape(data_x,[n m]);
 inp=reshape(data_test,[nn mm]);
 
@@ -26,22 +26,26 @@ layers = [ ...
     fullyConnectedLayer(numClasses)
     softmaxLayer
     classificationLayer];
-maxEpochs = 100;
-miniBatchSize = 27;
+maxEpochs = 300;
+miniBatchSize = 120;
 
 options = trainingOptions('adam', ...
     'ExecutionEnvironment','cpu', ...
-    'GradientThreshold',1, ...
+    'InitialLearnRate',0.9,...
+    'GradientThreshold',0.5, ...
     'MaxEpochs',maxEpochs, ...
     'MiniBatchSize',miniBatchSize, ...
     'SequenceLength','longest', ...
     'Shuffle','never', ...
+    'Plots', 'training-progress',...
     'Verbose',0);
 net = trainNetwork(inputdata,target,layers,options);
-miniBatchSize = 27;
+miniBatchSize = 120;
 P = classify(net,inp, ...
     'MiniBatchSize',miniBatchSize, ...
     'SequenceLength','longest');
+%disp(P);
+end
 
 
 

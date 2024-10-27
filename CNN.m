@@ -5,14 +5,14 @@ function [err] = CNN(fz,data_x, target_y)
 %       [128 1 1 numberOfReadings]
 %   target_y: 1-D Categorial containing the signal labels
 %       [numberOfReadings 1]
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-fz;
-[m, n]=size(data_x);
+
+fz
+[m n]=size(data_x);
 inputdata=reshape(data_x,[n m]);
 target=categorical(target_y);
 inputSize = n;
-numHiddenUnits = fz;
+numHiddenUnits = 100;
 numClasses = length(unique(target));
 
 layers = [ ...
@@ -21,7 +21,7 @@ layers = [ ...
     fullyConnectedLayer(numClasses)
     softmaxLayer
     classificationLayer];
-maxEpochs = 100;
+maxEpochs =100;
 miniBatchSize = 27;
 
 options = trainingOptions('adam', ...

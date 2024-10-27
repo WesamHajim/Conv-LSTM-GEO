@@ -30,7 +30,7 @@ Leader_pos=zeros(1,nvars);
 ConvergenceCurve  = zeros (1, MaxIterations);
 
 x = max(round(lb + randi([1,nvars]) .* (ub-lb)));
-x;
+x
 FitnessScores = fobj(x,trdata,trlabel);
 
 
@@ -194,7 +194,7 @@ display(['The best solution obtained by GEO is : ', num2str(Leader_pos,7)]);
 %display(['The best optimal value of the objective funciton found by GEO is : ', num2str(Leader_score,7)]);
 display(['Population diversity: ', num2str(mean(Div))])
 %display(['Exploration-exploitation percentage ratio: ', num2str((Xpl/(Xpl+Xpt))*100),':',num2str((Xpt/(Xpl+Xpt))*100)])
-disp(fprintf('&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&'));  
+disp(sprintf('&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&'));  
 end
 
 
